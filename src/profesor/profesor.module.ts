@@ -1,27 +1,10 @@
-import { PropuestaEntity } from 'src/propuesta/propuesta.module';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Module } from '@nestjs/common';
+import { ProfesorService } from './profesor.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProfesorEntity } from './profesor.entity';
 
-@Entity()
-export class ProfesorEntity{
-
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
-
-    @Column()
-    cedula: number;
-
-    @Column()
-    nombre: string;
-
-    @Column()
-    grupo_investigacion: string;
-
-    @Column()
-    numero_extension: number;
-
-    @OneToMany(() => PropuestaEntity, propuesta => propuesta.profesor)
-    propuestas: PropuestaEntity[]
-
-    
-
-}
+@Module({
+  providers: [ProfesorService],
+  imports: [TypeOrmModule.forFeature([ProfesorEntity])]
+})
+export class ProfesorModule {}
