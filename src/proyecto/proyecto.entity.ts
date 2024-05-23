@@ -1,4 +1,4 @@
-import { EstudianteEntity } from 'src/estudiante/estudiante.module';
+import { EstudianteEntity } from 'src/estudiante/estudiante.entity';
 import { PropuestaEntity } from 'src/propuesta/propuesta.entity';
 import { Column, Entity, PrimaryGeneratedColumn, OneToOne } from 'typeorm'
 import { ProyectoService } from './proyecto.service';
