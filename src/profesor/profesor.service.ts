@@ -23,14 +23,39 @@ export class ProfesorService {
         return profesor;
     }
 
-    async deleteById(id:string){
-        const profesor: ProfesorEntity = await this.profesorRepository.findOne({where:{id}});
-        await this.profesorRepository.remove(profesor);
+    async validDelete(criterio, buscar) {
+        let profesor: ProfesorEntity
+        if( criterio == 1 ){
+            let id = buscar
+            const profesor: ProfesorEntity = await this.profesorRepository.findOne({where:{id} });
+        } else if( criterio == 2 ){
+            let cedula = buscar
+            const profesor: ProfesorEntity = await this.profesorRepository.findOne({where:{cedula} });
+        }
+
+        let propuestas = profesor.propuestas
+        let valid = true
+        propuestas.forEach(
+            propuesta => {
+                if (!propuesta.proyecto){
+                    valid = false
+                }
+            })
+        return valid
     }
 
-    async deleteByCedula(cedula:number){
+    async deleteProfesorById(id:string){
+        const profesor: ProfesorEntity = await this.profesorRepository.findOne({where:{id}});
+        if(this.validDelete(1, id)){
+            await this.profesorRepository.remove(profesor);
+        }
+    }
+
+    async deleteProfesorByCedula(cedula:number){
         const profesor: ProfesorEntity = await this.profesorRepository.findOne({where:{cedula}});
+        if(this.validDelete(2, cedula)){
         await this.profesorRepository.remove(profesor);
+        }
     }
     
 
