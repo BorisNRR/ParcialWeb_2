@@ -11,7 +11,7 @@ export class ProyectoService {
         private readonly propuestaRepository: Repository<ProyectoEntity>
     ){}
 
-    async createPropuesta(proyecto: ProyectoEntity): Promise<ProyectoEntity>{
+    async createProyecto(proyecto: ProyectoEntity): Promise<ProyectoEntity>{
         if(proyecto.fecha_fin > proyecto.fecha_inicio){
         }
         return await this.propuestaRepository.save(proyecto)
